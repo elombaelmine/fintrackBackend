@@ -26,21 +26,19 @@ if (!JWT_SECRET) {
 }
 
 function isAllowedOrigin(origin) {
-  // 1. Allow if no origin (prevents blocking some server-to-server calls)
+  // 1. Always allow if origin is null
   if (!origin) return true;
 
-  // 2. Check your allowedOrigins Set
-  if (allowedOrigins.has(origin)) return true;
-
-  // 3. DEBUG: Log the origin to your Render logs so you can see exactly what it is
-  console.log("CORS checking origin:", origin);
-
-  // 4. Force allow your specific Vercel production URL
+  // 2. Allow your Vercel frontend
   if (origin === 'https://fintrack-frontend-navy.vercel.app') return true;
 
-  // 5. Allow local development
+  // 3. Allow the backend URL (to stop the current error)
+  if (origin === 'https://fintrackbackend-xtg8.onrender.com') return true;
+
+  // 4. Allow local development
   if (/^http:\/\/(localhost|127\.0\.0\.1):42\d{2}$/.test(origin)) return true;
 
+  console.log("CORS blocked origin:", origin);
   return false;
 }
 
