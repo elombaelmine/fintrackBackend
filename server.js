@@ -16,6 +16,7 @@ const allowedOrigins = new Set([
   'http://127.0.0.1:4201',
   'http://localhost:4202',
   'http://127.0.0.1:4202',
+  'https://fintrack-frontend-navy.vercel.app',
   process.env.CLIENT_ORIGIN,
   process.env.CLIENT_PROD
 ].filter(Boolean));
